@@ -3,30 +3,33 @@ body {
     flex-direction: row;
     margin: 0px;
     height: 100vh;
-
 }
 
 #sidebar {
     background-color: #75FBC9;
-    width: 20vw;
+    flex-grow: 1;
 }
 
 #page    {
     display: flex;
     flex-direction: column;
-    width: 80vw;
+    flex-grow: 3;
 }
 
 #upbar{
     background-color: #75FBFE;
-    height: 10vh;
+    flex-grow: 1;
 }
 
 #content {
     background-color: #CCCCCC;
-    height: 90vh;
+    flex-grow: 2;
+    display: grid;
+    grid-template-rows: 200px 200px;
+    grid-template-columns: 1fr 1fr;
 }
 
 .ele {
     background-color: #D92E8A;
+    margin: 10px;
 }
