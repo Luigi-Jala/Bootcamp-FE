@@ -1,59 +1,30 @@
-# MyAngularProject
+# 🎓 Angular Learning Journey: Smart Recipe Box
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.11.
+This repository tracks my progress as I learn Modern Angular (v20) through a guided, project-based tutorial. I am building the **Smart Recipe Box** application while mastering core concepts and best practices.
 
-## Development server
+## 🚀 Progress Report
 
-To start a local development server, run:
+### Phase 1: Angular Fundamentals
+*   **Module 1: Getting Started** ✅
+    *   *Concept:* Component anatomy (Logic, Template, Styles).
+    *   *Achievement:* Successfully cleared the default Angular boilerplate and established the app identity with a custom `<h1>` header.
+*   **Module 2: Dynamic Text with Interpolation** ✅
+    *   *Concept:* Signals and Template Interpolation `{{ }}`.
+    *   *Achievement:* Refactored the app title into a `protected readonly` signal and displayed it dynamically.
+*   **Module 3: Event Listeners** ✅
+    *   *Concept:* DOM Events and `(click)` bindings.
+    *   *Achievement:* Added interactive buttons that trigger custom methods to log messages to the browser console.
 
-```bash
-ng serve
-```
+### Phase 2: State and Signals
+*   **Module 4: State Management (Part 1: `set`)** ✅
+    *   *Concept:* Writable Signals and the `.set()` method.
+    *   *Achievement:* Implemented a `recipe` signal and built a mechanism to switch between different mock recipes instantly.
+*   **Module 5: State Management (Part 2: `update`)** ✅
+    *   *Concept:* Modifying state with the `.update()` method.
+    *   *Achievement:* Created a `servings` counter and used functional updates with `Math.max(1, ...)` to ensure a valid state.
+*   **Module 6: Computed Signals** ✅
+    *   *Concept:* Derived reactive state with `computed()`.
+    *   *Achievement:* Developed a complex `adjustedIngredients` signal that automatically recalculates quantities whenever the recipe or servings change. Used modern `@for` blocks for rendering.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+*Status: Currently working on **Phase 3: Component Architecture**.*
