@@ -1,0 +1,8 @@
+<div>
+    <div>
+        <button (click)="changeRecipe(0)">Show first</button>
+        <button (click)="changeRecipe(1)">Show second</button>
+    </div>
+    
+    <app-recipe-detail [recipe]="recipe()"></app-recipe-detail>
+</div>

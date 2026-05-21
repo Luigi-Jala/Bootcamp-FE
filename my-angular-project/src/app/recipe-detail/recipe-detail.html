@@ -1,0 +1,24 @@
+<div class="recipe-detail-container">
+    <img class="recipe-image" [src]="recipeImage()" alt="Recipe image">
+    <div class="recipe-info">
+        <div>
+            <div class="recipe-name">{{ recipe()?.name }}</div>
+            <div class="recipe-description">{{ recipe()?.description }}</div>
+        </div>
+        <div class="ingredients-section">
+            <h2>Ingredients</h2>
+            <ul>
+                @for (ingredient of adjustedIngredients(); track ingredient) {
+                    <li>{{ ingredient.name }}: {{ ingredient.quantity }} {{ ingredient.unit }}</li>
+                } @empty {
+                    <li>No ingredients found.</li>
+                }
+            </ul>
+        </div>
+        <div class="servings-section">
+            <h1>Servings: {{ servings() }}</h1>
+            <button (click)="incrementServings(-1)">-</button>
+            <button (click)="incrementServings(+1)">+</button>
+        </div>
+    </div>
+</div>

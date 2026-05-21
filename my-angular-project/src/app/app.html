@@ -1,29 +1,6 @@
 <main class="main">
   <h1> {{ title() }} </h1>
-  <h3> {{ recipe().name }} </h3>
-  <h3> {{ recipe().description }} </h3>
-  <div>
-    <button (click)="changeRecipe(0)">Show first</button>
-    <button (click)="changeRecipe(1)">Show second</button>
-  </div>
-
-  <div>
-    <h2>Ingredients</h2>
-    <ul>
-      @for (ingredient of adjustedIngredients(); track ingredient) {
-        <li>{{ ingredient.name }}: {{ ingredient.quantity }} {{ ingredient.unit }}</li>
-      } @empty {
-        <li>No ingredients found.</li>
-      }
-    </ul>
-  </div>
-  
-  <div>
-    <h1> Servings: {{ servings() }} </h1>
-    <button (click)="incrementServings(-1)">-</button>
-    <button (click)="incrementServings(+1)">+</button>
-  </div>
-  
+  <app-recipe-list></app-recipe-list>
 </main>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->

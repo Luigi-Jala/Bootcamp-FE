@@ -4,6 +4,7 @@ export const MOCK_RECIPES: RecipeModel[] = [
         id: 1,
         name: 'Spaghetti Carbonara',
         description: 'A classic Italian pasta dish.',
+        imgUrl: 'https://www.giallozafferano.com/images/228-22875/spaghetti-carbonara_1200x800.jpg',
         ingredients: [
             { name: 'Spaghetti', quantity: 200, unit: 'g' },
             { name: 'Guanciale', quantity: 100, unit: 'g' },
@@ -16,6 +17,7 @@ export const MOCK_RECIPES: RecipeModel[] = [
         id: 2,
         name: 'Caprese Salad',
         description: 'A simple and refreshing Italian salad.',
+        imgUrl: 'https://reluctantgourmet.com/wp-content/uploads/2023/09/tomato-basil-mozzarella-d3-480x270.jpeg',
         ingredients: [
             { name: 'Tomatoes', quantity: 4, unit: 'each' },
             { name: 'Fresh Mozzarella', quantity: 200, unit: 'g' },
