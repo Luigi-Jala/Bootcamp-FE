@@ -1,0 +1,14 @@
+<div class="main {{ sidebar() ? '' : ' collapsed' }}">
+    <div class="navbar"> </div>
+    <div class="side">
+        <button (click)="toggleSideBar()">
+            {{ sidebar() ? 'Collapse Menu' : 'Expand Menu' }}
+        </button>
+    </div>
+    <div class="header">Header</div>
+    <div class="header">Header</div>
+    <div class="content">Content</div>
+    <div class="content">Content</div>
+    <div class="content">Content</div>
+    <div class="content">Content</div>
+</div>
