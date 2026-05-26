@@ -2,6 +2,7 @@
 .main {
     display: grid;
     grid-template: 2fr 1fr 1fr 2fr 2fr / 1fr 1fr 1fr;
+    min-height: 100vh;
 }
 
 .main.collapsed {
@@ -28,4 +29,5 @@
 
 .content {
     background-color: pink;
+    margin: 1rem;
 }
