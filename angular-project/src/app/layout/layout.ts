@@ -7,8 +7,13 @@ import { Component, signal, Signal } from '@angular/core';
 })
 export class Layout {
     protected readonly sidebar = signal(true); 
+    protected readonly admin = signal(true); 
 
     protected toggleSideBar() : void {
         this.sidebar.update( prev => !prev);
+    }
+
+    protected toggleAdmin() : void {
+        this.admin.update( prev => !prev);
     }
 }

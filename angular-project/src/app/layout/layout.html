@@ -1,9 +1,16 @@
 <div class="main {{ sidebar() ? '' : ' collapsed' }}">
-    <div class="navbar"> </div>
-    <div class="side">
-        <button (click)="toggleSideBar()">
-            {{ sidebar() ? 'Collapse Menu' : 'Expand Menu' }}
+    <div class="navbar">
+        <div>Image this is a backend call :P</div>
+        <button (click)="toggleAdmin()">
+            {{ admin() ? 'Revoke admin permission' : 'Provide admin permission' }}
         </button>
+    </div>
+    <div class="side">
+        @if (admin()) {
+            <button (click)="toggleSideBar()">
+                {{ sidebar() ? 'Collapse Menu' : 'Expand Menu' }}
+            </button>
+        }
     </div>
     <div class="header1">Header</div>
     <div class="header2">Header</div>
