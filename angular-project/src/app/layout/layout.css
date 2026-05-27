@@ -12,22 +12,37 @@
 
 .navbar  {
     grid-column: span 3;
-    background-color: aqua;
+    background-color: #02FFFF;
 }
 
 .side {
     grid-row: span 4;
-    background-color: green;
+    background-color: #02FFC6;
     width: 100%;
     min-width: 60px;
 }
 
-.header {
+.header1 {
     grid-column: span 2;
-    background-color: blueviolet;
+    background-color: #A4C2F4;
+}
+
+.header2 {
+    grid-column: span 2;
+    background-color: #674EA7;
 }
 
 .content {
-    background-color: pink;
-    margin: 1rem;
+    grid-column: span 2;
+    grid-row: span 2;
+    background-color: #DCDCDC;
+    padding: 1rem;
+    display: grid;
+    grid-template: 1fr 1fr / 1fr 1fr;
+    gap: 1rem
+
+}
+
+.subcontent {
+    background-color: #F646A5;
 }
