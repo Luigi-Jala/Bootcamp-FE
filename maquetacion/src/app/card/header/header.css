@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    
+    color: black;
+    font-size: 8vw;
+    border: 0.4rem solid #2F4D51;
+}
+
+#name{
+
+}
+
+#Logo{
+
+}
