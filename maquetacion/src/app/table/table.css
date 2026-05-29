@@ -1,0 +1,50 @@
+.table {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    min-height: 100vh;
+    gap: 1rem;
+}
+
+.table-side {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(6, 1fr);
+    gap: 1rem;
+}
+
+.right-main {
+    grid-area: 3 / 1 / 4 / 2;
+}
+
+.right-secondary {
+    grid-column: 2;
+}
+
+.left-main {
+    grid-area: 4 / 2 / 5 / 3;
+}
+
+.left-secondary {
+    grid-column: 1;
+}
+
+.table-center {
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr 2fr 1fr;
+    gap: 1rem;
+}
+
+.center-upper {
+    grid-row: 2;
+}
+
+.center-bottom {
+    grid-row: 4;
+}
+
+.center-section {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
