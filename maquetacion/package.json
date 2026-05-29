@@ -1,5 +1,5 @@
 {
-  "name": "flexbox-layout",
+  "name": "maquetacion",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:flexbox-layout": "node dist/flexbox-layout/server/server.mjs"
+    "serve:ssr:maquetacion": "node dist/maquetacion/server/server.mjs"
   },
   "private": true,
   "packageManager": "npm@10.9.2",
