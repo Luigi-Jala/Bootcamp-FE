@@ -1,7 +1,13 @@
 <div>
-    <div>
-        <button (click)="changeRecipe(0)">Show first</button>
-        <button (click)="changeRecipe(1)">Show second</button>
+    <div style="margin-bottom: 2rem;">
+        @for (r of recipes; track r.id) {
+            <button (click)="recipe.set(r)" style="margin-right: 1rem;">
+                {{ r.name }}
+                @if (r.isFavorite) {
+                    <span> ⭐</span>
+                }
+            </button>
+        }
     </div>
     
     <app-recipe-detail [recipe]="recipe()"></app-recipe-detail>

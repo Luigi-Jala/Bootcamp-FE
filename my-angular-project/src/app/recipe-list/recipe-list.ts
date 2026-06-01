@@ -9,6 +9,7 @@ import { RecipeDetail } from "../recipe-detail/recipe-detail";
     templateUrl: './recipe-list.html'
 })
 export class RecipeList {
+    protected readonly recipes = MOCK_RECIPES;
     protected readonly recipe = signal(MOCK_RECIPES[0]);
 
     protected changeRecipe(index:number) : void {
