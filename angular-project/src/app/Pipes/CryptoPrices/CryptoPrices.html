@@ -1,5 +1,11 @@
-<h3>Crypto Prices</h3>
+<h3>Crypto Prices - Default</h3>
 <ul>
     <li>Bitcoin: ${{ btcPrice | number:'1.2-6' }}</li>
     <li>Ethereum: ${{ ethPrice | number:'1.2-6' }}</li>
+</ul>
+
+<h3>Crypto Prices - France</h3>
+<ul>
+    <li>Bitcoin: ${{ btcPrice | number:'1.2-6' : 'fr'  }}</li>
+    <li>Ethereum: ${{ ethPrice | number:'1.2-6' : 'fr'  }}</li>
 </ul>
