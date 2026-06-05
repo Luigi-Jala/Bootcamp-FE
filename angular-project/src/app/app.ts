@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Layout } from './layout/layout';
+import { CryptoPrices } from './Pipes/CryptoPrices/CryptoPrices';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Layout],
+  imports: [RouterOutlet, Layout, CryptoPrices],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
