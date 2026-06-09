@@ -4,10 +4,12 @@ import { Layout } from './layout/layout';
 import { CryptoPrices } from './Pipes/CryptoPrices/CryptoPrices';
 import { ShoppingCart } from './Pipes/ShoppingCart/ShoppingCart';
 import { Dashboard } from './Pipes/Dashboard/Dashboard';
+import { CustomPipeComponent } from './Pipes/CustomPipe/CustomPipeComponent';
+import { CompletedPipeComponent } from './Pipes/CustomPipe/CompletedPipeComponent';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Layout, CryptoPrices, ShoppingCart, Dashboard],
+  imports: [RouterOutlet, Layout, CryptoPrices, ShoppingCart, Dashboard, CustomPipeComponent, CompletedPipeComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
