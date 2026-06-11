@@ -6,10 +6,11 @@ import { ShoppingCart } from './Pipes/ShoppingCart/ShoppingCart';
 import { Dashboard } from './Pipes/Dashboard/Dashboard';
 import { CustomPipeComponent } from './Pipes/CustomPipe/CustomPipeComponent';
 import { CompletedPipeComponent } from './Pipes/CustomPipe/CompletedPipeComponent';
+import { BindingComponent } from './BindingComponent/BindingComponent';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Layout, CryptoPrices, ShoppingCart, Dashboard, CustomPipeComponent, CompletedPipeComponent],
+  imports: [RouterOutlet, Layout, CryptoPrices, ShoppingCart, Dashboard, CustomPipeComponent, CompletedPipeComponent, BindingComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
