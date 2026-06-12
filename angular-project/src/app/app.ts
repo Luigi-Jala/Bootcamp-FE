@@ -7,10 +7,11 @@ import { Dashboard } from './Pipes/Dashboard/Dashboard';
 import { CustomPipeComponent } from './Pipes/CustomPipe/CustomPipeComponent';
 import { CompletedPipeComponent } from './Pipes/CustomPipe/CompletedPipeComponent';
 import { BindingComponent } from './BindingComponent/BindingComponent';
+import { ModelExample } from './ModelExample - Geronimo/model-example';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Layout, CryptoPrices, ShoppingCart, Dashboard, CustomPipeComponent, CompletedPipeComponent, BindingComponent],
+  imports: [RouterOutlet, Layout, CryptoPrices, ShoppingCart, Dashboard, CustomPipeComponent, CompletedPipeComponent, BindingComponent, ModelExample],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
