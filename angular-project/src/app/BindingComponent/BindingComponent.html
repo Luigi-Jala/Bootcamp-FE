@@ -1,4 +1,11 @@
-<div >
+<div class="parent-container">
+
+  <div class="parent-section">
+    <h2>Parent Component</h2>
+    <h1 [style.color]="myColor()">Este texto cambia de colores (Padre) :O</h1>
     <input type="color" [(ngModel)]="myColor"/>
-    <child-binding [(colorChild)]="myColor"></child-binding>
+  </div>
+
+  <child-binding [(colorChild)]="myColor"></child-binding>
+
 </div>

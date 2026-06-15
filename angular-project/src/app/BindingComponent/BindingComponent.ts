@@ -1,4 +1,4 @@
-import { Component, model } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ChildComponent } from './ChildComponent/ChildComponent';
 
@@ -6,7 +6,8 @@ import { ChildComponent } from './ChildComponent/ChildComponent';
     selector: 'data-binding',
     imports: [FormsModule, ChildComponent],
     templateUrl: './BindingComponent.html',
+    styleUrl: './BindingComponent.css',
 })
 export class BindingComponent {
-  myColor = model('#000000'); 
+  myColor = signal('#003cff'); 
 }
