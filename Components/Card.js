@@ -24,7 +24,8 @@ class Card extends HTMLElement {
                     display: flex;
                     flex-direction: column;
                     border: 0.5rem solid #000000;
-                    max-width: 40rem;
+                    max-width: 36rem;
+                    font-family: monospace;
                 }
             </style>
         `;

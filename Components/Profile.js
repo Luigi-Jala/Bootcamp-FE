@@ -27,7 +27,7 @@ class Profile extends HTMLElement {
                 img {
                     border-radius: 25%;
                     width: 80%;
-                    margin: 4rem;
+                    margin: 2rem;
                 }
             </style>
         `;

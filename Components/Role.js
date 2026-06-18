@@ -9,8 +9,9 @@ class Role extends HTMLElement {
             </h2>
             <style>
                 .role {
-                    font-size: 2rem;
+                    font-size: 3rem;
                     background-color: rgb(231, 15, 15);
+                    color: white;
                     margin: 0;
                     padding: 2rem;
                     font-weight: bold;
