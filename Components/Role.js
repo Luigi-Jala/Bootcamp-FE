@@ -1,9 +1,11 @@
 class Role extends HTMLElement {
     constructor () {
         super();
+        this.attachShadow({mode: 'open'});
+    }
 
-        const shadow = this.attachShadow({mode: 'open'});
-        shadow.innerHTML = `
+    connectedCallback() {
+        this.shadowRoot.innerHTML = `
             <h2 class="role">
                 ${this.getAttribute('role-name')}
             </h2>

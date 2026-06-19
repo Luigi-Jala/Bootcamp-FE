@@ -1,9 +1,11 @@
 class Card extends HTMLElement {
     constructor () {
         super();
-        
-        const shadow = this.attachShadow({mode: 'open'});
-        shadow.innerHTML = `
+        this.attachShadow({mode: 'open'});
+    }
+
+    connectedCallback() {
+        this.shadowRoot.innerHTML = `
             <main class="card">
                 <my-logo 
                     logo-src="${this.getAttribute('logo-src')}"

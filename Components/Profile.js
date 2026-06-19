@@ -1,9 +1,11 @@
 class Profile extends HTMLElement {
     constructor () {
         super();
+        this.attachShadow({mode: 'open'});
+    }
 
-        const shadow = this.attachShadow({mode: 'open'});
-        shadow.innerHTML = `
+    connectedCallback() {
+        this.shadowRoot.innerHTML = `
             <figure class="profile">
                 <img src="${this.getAttribute('profile-src')}" alt="Profile Picture">
                 <figcaption class="name">${this.getAttribute('name')}</figcaption>
