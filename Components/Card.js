@@ -7,18 +7,9 @@ class Card extends HTMLElement {
     connectedCallback() {
         this.shadowRoot.innerHTML = `
             <main class="card">
-                <my-logo 
-                    logo-src="${this.getAttribute('logo-src')}"
-                ></my-logo>
-
-                <my-profile 
-                    name="${this.getAttribute('name')}" 
-                    profile-src="${this.getAttribute('profile-src')}"
-                ></my-profile>
-
-                <my-role 
-                    role-name="${this.getAttribute('role')}"
-                ></my-role>
+                <slot name="logo"></slot>
+                <slot name="profile"></slot>
+                <slot name="role"></slot>
             </main>
 
             <style>
