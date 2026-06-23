@@ -18,6 +18,7 @@ class Card extends HTMLElement {
                     flex-direction: column;
                     border: 0.5rem solid #000000;
                     max-width: 36rem;
+                    color: #00ff22;
                     font-family: monospace;
                 }
             </style>
