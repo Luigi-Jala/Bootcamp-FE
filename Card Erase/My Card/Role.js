@@ -12,11 +12,11 @@ class Role extends HTMLElement {
                 <h2> ${this.getAttribute('role-name')} </h2>
 
                 <button onclick="removeComponent('main-card')">
-                    Remove Role (Inside Role Component)
+                    Remove Card (Inside Role Component)
                 </button>
 
                 <button onclick="removeComponent('main-role')">
-                    Remove Card (Inside Role Component)
+                    Remove Role (Inside Role Component)
                 </button>
             </div>
 
