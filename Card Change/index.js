@@ -1,14 +1,3 @@
-function removeMainCard() {
-    const card = document.getElementById("main-card");
-    if (card) card.remove();
-}
-
-function removeSecondaryRoleComponent(){
-    const role = document.getElementById("card-role");
-    console.log(role)
-    if (role) role.remove();
-}
-
 function changeRoleColor() {
     const role = document.getElementById("card-role");
     if (role) {

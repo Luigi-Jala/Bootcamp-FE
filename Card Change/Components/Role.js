@@ -12,14 +12,6 @@ class Role extends HTMLElement {
                 ${this.getAttribute('role-name')}
             </h2>
 
-            <button onclick="removeSecondaryRoleComponent()">
-                Remove Role (Inside Role Component)
-            </button>
-
-            <button onclick="removeMainCard()">
-                Remove Card (Inside Role Component)
-            </button>
-
             <style>
                 .role {
                     font-size: 3rem;
@@ -37,16 +29,15 @@ class Role extends HTMLElement {
         if (name === 'role-color') {
             console.log(`Color changed from ${oldValue} to ${newValue}`);
             
-            // this.connectedCallback();
+            // Update with query:
             const roleElement = this.shadowRoot.querySelector('.role');
             if (roleElement) {
                 roleElement.style.backgroundColor = newValue;
             }
-        }
-    }
 
-    disconnectedCallback() {
-        console.log('Role component has been disconnected from the DOM!');
+            // Re-render component
+            // this.connectedCallback();
+        }
     }
 }
 

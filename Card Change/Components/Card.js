@@ -10,18 +10,6 @@ class Card extends HTMLElement {
                 <slot name="logo"></slot>
                 <slot name="profile"></slot>
                 <slot name="role"></slot>
-
-                <slot name="hi-test">
-                    <span style="color: rgb(0, 0, 255);">Hello Default</span>
-                </slot>
-
-                <slot name="bye-test">
-                    <span style="color: rgb(0, 0, 255);">Bye Default</span>
-                </slot>
-
-                <button onclick="removeMainCard()">
-                    Remove Card (Inside Card Component)
-                </button>
             </main>
 
             <style>
@@ -30,15 +18,11 @@ class Card extends HTMLElement {
                     flex-direction: column;
                     border: 0.5rem solid #000000;
                     max-width: 36rem;
-                    color: rgb(0,255,0);
+                    color: rgb(255, 255, 255);
                     font-family: monospace;
                 }
             </style>
         `;
-    }
-
-    disconnectedCallback() {
-        console.log('Card component has been disconnected from the DOM!');
     }
 
 }

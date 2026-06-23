@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Web Component Challenge!</title>
+    <script src="My Card/Profile.js" defer></script>
+    <script src="My Card/Logo.js" defer></script>
+    <script src="My Card/Role.js" defer></script>
+    <script src="My Card/Card.js" defer></script>
+    <script src="Aux Component/AuxComponent.js" defer></script>
+    <script src="index.js"></script>
+</head>
+<body>
+    <my-card id="main-card">
+        <my-logo 
+            slot="logo" 
+            logo-src="https://mma.prnewswire.com/media/2841830/jalasoft_Logo.jpg"
+        ></my-logo>
+
+        <my-profile 
+            slot="profile" 
+            name="Hiratoka Nifuji" 
+            profile-src="https://i.pinimg.com/736x/d8/bc/92/d8bc92c9fc5b314a54b3c79dd3444a9c.jpg"
+        ></my-profile>
+
+        <my-role 
+            id="main-role"
+            slot="role" 
+            role-name="Developer"
+        ></my-role>
+        
+    </my-card>
+    
+    <button onclick="removeComponent('main-card')">
+        Remove Card (Outside)
+    </button>
+
+    <button onclick="removeComponent('main-role')">
+        Remove Role (Outside)
+    </button>
+
+
+    <hr>
+
+    <aux-component></aux-component>
+
+</body>
+</html>

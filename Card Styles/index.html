@@ -27,28 +27,24 @@
             role-name="Developer"
         ></my-role>
         
-        <!-- Hello Slot does will use its default content -->
+        <!-- Test-1 Slot does will use its default content -->
 
         <span
-            slot="bye-test"
+            slot="test-2"
             style="color: rgb(255, 0, 8);"
         >
-            Bye as Parameter
+            Test-2 as Parameter
+        </span>
+
+        <span slot="test-3">
+            Test-3 as Parameter
+        </span>
+
+        <span slot="test-4" style="color: rgb(153, 0, 255);">
+            Test-4 as Parameter
         </span>
         
     </my-card>
-    
-    <button onclick="removeMainCard()">
-        Remove Card (Outside Card Component)
-    </button>
-
-    <button onclick="removeSecondaryRoleComponent()">
-        Remove Role (Outside Role Component)
-    </button>
-
-    <button onclick="changeRoleColor()">
-        Change Role Color
-    </button>
 
 </body>
 </html>
