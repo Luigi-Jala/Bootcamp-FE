@@ -10,6 +10,15 @@ class Card extends HTMLElement {
                 <slot name="logo"></slot>
                 <slot name="profile"></slot>
                 <slot name="role"></slot>
+
+                <slot name="hi-test">
+                    <span style="color: rgb(0, 0, 255);">Hello Default</span>
+                </slot>
+
+                <slot name="bye-test">
+                    <span style="color: rgb(0, 0, 255);">Bye Default</span>
+                </slot>
+
             </main>
 
             <style>
@@ -18,7 +27,7 @@ class Card extends HTMLElement {
                     flex-direction: column;
                     border: 0.5rem solid #000000;
                     max-width: 36rem;
-                    color: #00ff22;
+                    color: rgb(0,255,0);
                     font-family: monospace;
                 }
             </style>
