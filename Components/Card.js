@@ -19,6 +19,9 @@ class Card extends HTMLElement {
                     <span style="color: rgb(0, 0, 255);">Bye Default</span>
                 </slot>
 
+                <button onclick="removeMainCard()">
+                    Remove Card (Inside Card Component)
+                </button>
             </main>
 
             <style>
@@ -32,6 +35,10 @@ class Card extends HTMLElement {
                 }
             </style>
         `;
+    }
+
+    disconnectedCallback() {
+        console.log('Card component has been disconnected from the DOM!');
     }
 
 }

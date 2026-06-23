@@ -4,15 +4,26 @@ class Role extends HTMLElement {
         this.attachShadow({mode: 'open'});
     }
 
+    static observedAttributes = ['role-color'];
+
     connectedCallback() {
         this.shadowRoot.innerHTML = `
             <h2 class="role">
                 ${this.getAttribute('role-name')}
             </h2>
+
+            <button onclick="removeSecondaryRoleComponent()">
+                Remove Role (Inside Role Component)
+            </button>
+
+            <button onclick="removeMainCard()">
+                Remove Card (Inside Role Component)
+            </button>
+
             <style>
                 .role {
                     font-size: 3rem;
-                    background-color: rgb(231, 15, 15);
+                    background-color: ${this.getAttribute('role-color') || 'rgb(231, 15, 15)'};
                     margin: 0;
                     padding: 2rem;
                     font-weight: bold;
@@ -20,6 +31,22 @@ class Role extends HTMLElement {
                 }
             </style>
         `
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name === 'role-color') {
+            console.log(`Color changed from ${oldValue} to ${newValue}`);
+            
+            // this.connectedCallback();
+            const roleElement = this.shadowRoot.querySelector('.role');
+            if (roleElement) {
+                roleElement.style.backgroundColor = newValue;
+            }
+        }
+    }
+
+    disconnectedCallback() {
+        console.log('Role component has been disconnected from the DOM!');
     }
 }
 
