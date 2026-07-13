@@ -1,0 +1,45 @@
+.detail {
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  margin-top: 20px;
+  padding: 16px;
+}
+
+.back-button {
+  background: #eeeeee;
+  border: 1px solid #c5c5c5;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 16px;
+  padding: 8px 12px;
+}
+
+.detail-layout {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 260px 1fr;
+}
+
+.detail-image, .missing-image {
+  width: 250px;
+}
+
+.missing-image {
+  background: #eeeeee;
+  color: #666666;
+  height: 365px;
+}
+
+h2 {
+  margin: 0 0 6px;
+}
+
+.type {
+  color: #555555;
+  margin: 0 0 8px;
+}
+
+.kind {
+  font-weight: 700;
+  margin: 0 0 16px;
+}

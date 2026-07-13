@@ -1,0 +1,13 @@
+.card-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  margin-top: 18px;
+}
+
+.empty-message {
+  color: #555555;
+  grid-column: 1 / -1;
+  margin: 20px 0;
+}
+

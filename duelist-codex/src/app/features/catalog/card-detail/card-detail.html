@@ -1,0 +1,39 @@
+<section class="detail">
+  <button class="back-button" type="button" (click)="goBack()">Back to catalog</button>
+
+  <div class="detail-layout">
+    <div class="image-column">
+      @if (imageUrl()) {
+        <img class="detail-image" [src]="imageUrl()" [alt]="card().name" />
+      } @else {
+        <div class="missing-image">No image</div>
+      }
+    </div>
+
+    <div class="info-column">
+      <h2>{{ card().name }}</h2>
+      <p class="type">{{ readableType() }}</p>
+
+      @switch (card().frameType) {
+        @case ('normal') {
+          <p class="kind">Monster card</p>
+        }
+        @case ('effect') {
+          <p class="kind">Monster card</p>
+        }
+        @case ('spell') {
+          <p class="kind">Spell card</p>
+        }
+        @case ('trap') {
+          <p class="kind">Trap card</p>
+        }
+        @default {
+          <p class="kind">Card detail</p>
+        }
+      }
+
+      <app-info-tabs [sections]="sections()" />
+    </div>
+  </div>
+</section>
+

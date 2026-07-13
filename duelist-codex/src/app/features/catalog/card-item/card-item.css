@@ -1,0 +1,40 @@
+.card-item {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  text-align: center;
+}
+
+.card-image, .missing-image {
+  height: 180px;
+  width: 125px;
+}
+
+.card-image {
+  object-fit: cover;
+}
+
+.missing-image {
+  background: #eeeeee;
+  color: #666666;
+}
+
+h3 {
+  font-size: 16px;
+  margin: 10px 0 6px;
+}
+
+p {
+  color: #555555;
+  margin: 0 0 10px;
+}
+
+button {
+  background: #183153;
+  border: 0;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  padding: 8px 10px;
+}
+
