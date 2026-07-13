@@ -8,7 +8,6 @@ import { CardApiService } from '../services/card-api.service';
 })
 export class CardStoreService {
   private readonly cardApi = inject(CardApiService);
-  private readonly visibleLimit = 60;
   private readonly hasLoaded = signal(false);
 
   readonly cards = signal<Card[]>([]);
@@ -16,6 +15,8 @@ export class CardStoreService {
   readonly loading = signal(false);
   readonly error = signal<string | null>(null);
   readonly selectedCard = signal<Card | null>(null);
+  readonly pageSize = signal(60);
+  readonly currentPage = signal(1);
 
   readonly filteredCards = computed(() => {
     const term = this.searchTerm().trim().toLowerCase();
@@ -29,9 +30,16 @@ export class CardStoreService {
     );
   });
 
-  readonly visibleCards = computed(() =>
-    this.filteredCards().slice(0, this.visibleLimit)
+  readonly totalPages = computed(() =>
+    Math.max(1, Math.ceil(this.filteredCards().length / this.pageSize()))
   );
+
+  readonly visibleCards = computed(() => {
+    const start = (this.currentPage() - 1) * this.pageSize();
+    const end = start + this.pageSize();
+
+    return this.filteredCards().slice(start, end);
+  });
 
   readonly hasNoResults = computed(
     () =>
@@ -51,6 +59,8 @@ export class CardStoreService {
 
   readonly totalCount = computed(() => this.filteredCards().length);
   readonly visibleCount = computed(() => this.visibleCards().length);
+  readonly canGoPrevious = computed(() => this.currentPage() > 1);
+  readonly canGoNext = computed(() => this.currentPage() < this.totalPages());
 
   loadCards(): void {
     if (this.hasLoaded() || this.loading()) {
@@ -76,6 +86,7 @@ export class CardStoreService {
   updateSearchTerm(term: string): void {
     this.searchTerm.set(term);
     this.selectedCard.set(null);
+    this.currentPage.set(1);
   }
 
   selectCard(card: Card): void {
@@ -85,5 +96,16 @@ export class CardStoreService {
   clearSelectedCard(): void {
     this.selectedCard.set(null);
   }
-}
 
+  goToPreviousPage(): void {
+    if (this.canGoPrevious()) {
+      this.currentPage.update((page) => page - 1);
+    }
+  }
+
+  goToNextPage(): void {
+    if (this.canGoNext()) {
+      this.currentPage.update((page) => page + 1);
+    }
+  }
+}

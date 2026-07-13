@@ -30,5 +30,12 @@ export class CatalogPageComponent implements OnInit {
   backToCatalog(): void {
     this.store.clearSelectedCard();
   }
-}
 
+  previousPage(): void {
+    this.store.goToPreviousPage();
+  }
+
+  nextPage(): void {
+    this.store.goToNextPage();
+  }
+}

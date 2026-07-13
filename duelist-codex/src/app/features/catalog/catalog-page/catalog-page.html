@@ -29,7 +29,28 @@
         [cards]="store.visibleCards()"
         (cardSelected)="selectCard($event)"
       />
+
+      <div class="pagination">
+        <button
+          type="button"
+          [disabled]="!store.canGoPrevious()"
+          (click)="previousPage()"
+        >
+          Previous
+        </button>
+
+        <span>
+          Page {{ store.currentPage() }} of {{ store.totalPages() }}
+        </span>
+
+        <button
+          type="button"
+          [disabled]="!store.canGoNext()"
+          (click)="nextPage()"
+        >
+          Next
+        </button>
+      </div>
     }
   }
 </main>
-

@@ -1,6 +1,6 @@
 # Duelist Codex
 
-Primera version de **Duelist Codex**, una aplicacion Angular para explorar cartas de Yu-Gi-Oh!, buscar por nombre y ver el detalle de una carta seleccionada.
+Primera version de **Duelist Codex**, una aplicacion Angular para explorar cartas de Yu-Gi-Oh!, buscar por nombre, navegar resultados por paginas y ver el detalle de una carta seleccionada.
 
 ## Como ejecutar
 
@@ -33,6 +33,7 @@ Componentes:
 
 - `CatalogPageComponent`
 - `CardGridComponent`
+- Controles simples de paginacion en `CatalogPageComponent`
 - `CardItemComponent`
 - `CardApiService`
 - `CardStoreService`
@@ -63,8 +64,9 @@ Expectativas tecnicas usadas:
 - Output para comunicar el termino de busqueda.
 - `ngAfterViewInit` para enfocar el input al cargar.
 - Signals y `computed` para filtrar resultados.
+- Signals para pagina actual, total de paginas y cartas visibles.
 
-Justificacion: el input necesita estado editable local, pero el termino real de busqueda vive en el store para mantener consistencia.
+Justificacion: el input necesita estado editable local, pero el termino real de busqueda vive en el store para mantener consistencia. Al cambiar la busqueda, la pagina vuelve a 1 para evitar resultados vacios por estar en una pagina alta.
 
 ### HU-03 - Ver detalle de una carta
 
@@ -115,7 +117,7 @@ Componentes/servicios:
 Expectativas tecnicas usadas:
 
 - Manejo de estado centralizado con Signals.
-- `computed` para resultados filtrados y cartas visibles.
+- `computed` para resultados filtrados, total de paginas y cartas visibles.
 - Servicio injectable con `providedIn: 'root'`.
 
 Justificacion: se eligieron Signals porque el estado principal es de UI: cartas, busqueda, carga, error y carta seleccionada. Para este caso son mas simples de explicar que `BehaviorSubject`.
@@ -126,5 +128,5 @@ Justificacion: se eligieron Signals porque el estado principal es de UI: cartas,
 - **Un solo endpoint:** se pudo llamar `?fname=` en cada busqueda, pero se eligio cargar una vez y filtrar en frontend por la indicacion del challenge.
 - **Detalle sin ruta propia:** se pudo usar Angular Router, pero para esta primera version era mas simple mantener el detalle en la misma pantalla y no perder la busqueda.
 - **Inputs/outputs entre componentes:** se pudo inyectar el store en componentes hijos, pero usar outputs demuestra comunicacion entre componentes y mantiene `CardItemComponent` mas reutilizable.
+- **Paginacion simple:** se pudo usar una libreria o paginacion desde API, pero se eligio una paginacion frontend con botones anterior/siguiente para mantener el codigo claro.
 - **CSS simple:** se uso CSS basico con grid, flex y clases directas para que el codigo sea facil de leer y explicar.
-
