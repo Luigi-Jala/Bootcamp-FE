@@ -1,59 +1,130 @@
-# DuelistCodex
+# Duelist Codex
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.11.
+Primera version de **Duelist Codex**, una aplicacion Angular para explorar cartas de Yu-Gi-Oh!, buscar por nombre y ver el detalle de una carta seleccionada.
 
-## Development server
-
-To start a local development server, run:
+## Como ejecutar
 
 ```bash
-ng serve
+npm install
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+La aplicacion queda disponible en:
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```text
+http://localhost:4200/
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## API usada
 
-```bash
-ng generate --help
+Se usa un solo endpoint de YGOPRODeck:
+
+```text
+https://db.ygoprodeck.com/api/v7/cardinfo.php
 ```
 
-## Building
+La aplicacion carga el catalogo una vez y luego filtra por nombre en el frontend. Se eligio esto porque el challenge indica que los filtros o modificaciones de datos deben hacerse del lado del frontend.
 
-To build the project run:
+## Historias de usuario
 
-```bash
-ng build
-```
+### HU-01 - Ver catalogo de cartas
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Componentes:
 
-## Running unit tests
+- `CatalogPageComponent`
+- `CardGridComponent`
+- `CardItemComponent`
+- `CardApiService`
+- `CardStoreService`
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Expectativas tecnicas usadas:
 
-```bash
-ng test
-```
+- Componentes standalone.
+- Servicio dedicado para acceso a datos.
+- `ngOnInit` para cargar el catalogo al entrar.
+- `@if`, `@for` y `@empty` para estados de carga, error, vacio y listado.
+- Interpolacion y property binding para mostrar nombre, tipo e imagen.
 
-## Running end-to-end tests
+Justificacion: la pagina coordina el flujo, el servicio llama la API, el store guarda el estado y los componentes visuales solo muestran datos.
 
-For end-to-end (e2e) testing, run:
+### HU-02 - Buscar cartas por nombre
 
-```bash
-ng e2e
-```
+Componentes:
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- `SearchBarComponent`
+- `CatalogPageComponent`
+- `CardStoreService`
+- `CardGridComponent`
 
-## Additional Resources
+Expectativas tecnicas usadas:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Two-way binding con `[(ngModel)]`.
+- Event binding con `(ngModelChange)`.
+- Output para comunicar el termino de busqueda.
+- `ngAfterViewInit` para enfocar el input al cargar.
+- Signals y `computed` para filtrar resultados.
+
+Justificacion: el input necesita estado editable local, pero el termino real de busqueda vive en el store para mantener consistencia.
+
+### HU-03 - Ver detalle de una carta
+
+Componentes:
+
+- `CardItemComponent`
+- `CardGridComponent`
+- `CatalogPageComponent`
+- `CardDetailComponent`
+- `CardStoreService`
+
+Expectativas tecnicas usadas:
+
+- Inputs y outputs para comunicar seleccion de carta.
+- Event binding para click en carta y boton de volver.
+- Signals para guardar la carta seleccionada.
+- `@if` para mostrar detalle o catalogo.
+
+Justificacion: se mantiene el detalle en la misma pantalla para conservar el contexto de busqueda sin agregar routing innecesario.
+
+### HU-04 - Organizar detalle en secciones
+
+Componentes:
+
+- `CardDetailComponent`
+- `InfoTabsComponent`
+
+Expectativas tecnicas usadas:
+
+- Componente reutilizable.
+- Inputs para recibir secciones.
+- Event binding para cambiar de pestana.
+- Signal interno para la pestana activa.
+- `@for` y `@if` para renderizar secciones.
+
+Justificacion: `InfoTabsComponent` esta en `shared` porque no depende de cartas; solo recibe titulos y lineas de informacion. Por eso podria reutilizarse en otras pantallas.
+
+### HU-05 - Mantener estado consistente
+
+Componentes/servicios:
+
+- `CardStoreService`
+- `CatalogPageComponent`
+- `SearchBarComponent`
+- `CardGridComponent`
+- `CardDetailComponent`
+
+Expectativas tecnicas usadas:
+
+- Manejo de estado centralizado con Signals.
+- `computed` para resultados filtrados y cartas visibles.
+- Servicio injectable con `providedIn: 'root'`.
+
+Justificacion: se eligieron Signals porque el estado principal es de UI: cartas, busqueda, carga, error y carta seleccionada. Para este caso son mas simples de explicar que `BehaviorSubject`.
+
+## Decisiones tecnicas
+
+- **Signals en vez de BehaviorSubject:** se pudo usar RxJS, pero Signals simplifica el estado para una app pequena y evita suscripciones manuales en componentes.
+- **Un solo endpoint:** se pudo llamar `?fname=` en cada busqueda, pero se eligio cargar una vez y filtrar en frontend por la indicacion del challenge.
+- **Detalle sin ruta propia:** se pudo usar Angular Router, pero para esta primera version era mas simple mantener el detalle en la misma pantalla y no perder la busqueda.
+- **Inputs/outputs entre componentes:** se pudo inyectar el store en componentes hijos, pero usar outputs demuestra comunicacion entre componentes y mantiene `CardItemComponent` mas reutilizable.
+- **CSS simple:** se uso CSS basico con grid, flex y clases directas para que el codigo sea facil de leer y explicar.
+
