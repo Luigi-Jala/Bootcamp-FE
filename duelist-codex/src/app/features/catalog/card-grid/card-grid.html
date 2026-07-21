@@ -1,0 +1,8 @@
+<section class="card-grid">
+  @for (card of cards(); track card.id) {
+    <app-card-item [card]="card" (cardSelected)="selectCard($event)" />
+  } @empty {
+    <p class="empty-message">No cards are available right now.</p>
+  }
+</section>
+

@@ -1,0 +1,26 @@
+<div class="tabs">
+  <div class="tab-buttons" role="tablist">
+    @for (section of sections(); track section.title; let index = $index) {
+      <button
+        type="button"
+        [class.active]="index === selectedIndex()"
+        (click)="selectSection(index)"
+      >
+        {{ section.title }}
+      </button>
+    }
+  </div>
+
+  @if (activeSection(); as section) {
+    <section class="tab-panel">
+      <h3>{{ section.title }}</h3>
+
+      @for (line of section.lines; track line) {
+        <p>{{ line }}</p>
+      } @empty {
+        <p>No information available.</p>
+      }
+    </section>
+  }
+</div>
+

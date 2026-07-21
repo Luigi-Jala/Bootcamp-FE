@@ -1,0 +1,35 @@
+.tab-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.tab-buttons button {
+  background: white;
+  border: 1px solid #b8b8b8;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 8px 12px;
+}
+
+.tab-buttons button.active {
+  background: #183153;
+  border-color: #183153;
+  color: white;
+}
+
+.tab-panel {
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.tab-panel h3 {
+  margin: 0 0 10px;
+}
+
+.tab-panel p {
+  margin: 0 0 8px;
+}
+

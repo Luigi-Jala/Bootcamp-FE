@@ -1,0 +1,13 @@
+<article class="card-item">
+  @if (imageUrl()) {
+    <img class="card-image" [src]="imageUrl()" [alt]="card().name" />
+  } @else {
+    <div class="missing-image">No image</div>
+  }
+
+  <h3>{{ card().name }}</h3>
+  <p>{{ readableType() }}</p>
+
+  <button type="button" (click)="selectCard()">View detail</button>
+</article>
+

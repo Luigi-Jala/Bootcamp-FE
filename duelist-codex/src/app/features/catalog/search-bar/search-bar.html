@@ -1,0 +1,11 @@
+<label class="search-label" for="card-search">Search by card name</label>
+<input
+  #searchInput
+  id="card-search"
+  class="search-input"
+  type="search"
+  placeholder="Try Dragon, Magician, Blue-Eyes..."
+  [(ngModel)]="term"
+  (ngModelChange)="onSearchChange($event)"
+/>
+
