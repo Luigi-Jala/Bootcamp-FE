@@ -1,7 +1,7 @@
 <main class="page">
   <header class="page-header">
-    <h1>Duelist Codex</h1>
-    <p>Explore Yu-Gi-Oh! cards and check the detail of the cards that interest you.</p>
+    <h1>Duelist Codex Catalog</h1>
+    <p>Explore Yu-Gi-Oh! cards, check their details and manage your collection.</p>
   </header>
 
   <app-search-bar
@@ -13,44 +13,37 @@
     <p class="status">Loading cards...</p>
   } @else if (store.error()) {
     <p class="status error">{{ store.error() }}</p>
-  } @else if (store.selectedCard(); as selectedCard) {
-    <app-card-detail [card]="selectedCard" (back)="backToCatalog()" />
+  } @else if (store.hasNoResults()) {
+    <p class="status">No cards match your search.</p>
+  } @else if (store.hasNoCards()) {
+    <p class="status">No cards are available right now.</p>
   } @else {
-    @if (store.hasNoResults()) {
-      <p class="status">No cards match your search.</p>
-    } @else if (store.hasNoCards()) {
-      <p class="status">No cards are available right now.</p>
-    } @else {
-      <p class="result-count">
-        Showing {{ store.visibleCount() }} of {{ store.totalCount() }} cards.
-      </p>
+    <p class="result-count">
+      Showing {{ store.visibleCount() }} of {{ store.totalCount() }} cards.
+    </p>
 
-      <app-card-grid
-        [cards]="store.visibleCards()"
-        (cardSelected)="selectCard($event)"
-      />
+    <app-card-grid [cards]="store.visibleCards()" />
 
-      <div class="pagination">
-        <button
-          type="button"
-          [disabled]="!store.canGoPrevious()"
-          (click)="previousPage()"
-        >
-          Previous
-        </button>
+    <div class="pagination">
+      <button
+        type="button"
+        [disabled]="!store.canGoPrevious()"
+        (click)="previousPage()"
+      >
+        Previous
+      </button>
 
-        <span>
-          Page {{ store.currentPage() }} of {{ store.totalPages() }}
-        </span>
+      <span>
+        Page {{ store.currentPage() }} of {{ store.totalPages() }}
+      </span>
 
-        <button
-          type="button"
-          [disabled]="!store.canGoNext()"
-          (click)="nextPage()"
-        >
-          Next
-        </button>
-      </div>
-    }
+      <button
+        type="button"
+        [disabled]="!store.canGoNext()"
+        (click)="nextPage()"
+      >
+        Next
+      </button>
+    </div>
   }
 </main>

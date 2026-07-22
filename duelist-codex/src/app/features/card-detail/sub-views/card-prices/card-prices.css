@@ -1,0 +1,41 @@
+.sub-view-content {
+  background: #1e1e1e;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #333;
+}
+
+h3 {
+  margin-top: 0;
+  color: #e5b842;
+}
+
+.prices-list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.prices-list li {
+  background: #141414;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vendor {
+  font-weight: bold;
+  color: #aaa;
+}
+
+.price-tag {
+  color: #4caf50;
+  font-weight: bold;
+  font-size: 1.05rem;
+}

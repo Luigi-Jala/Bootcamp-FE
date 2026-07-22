@@ -1,1 +1,21 @@
-<app-catalog-page />
+<div class="app-layout">
+  <nav class="main-navbar">
+    <div class="nav-brand">
+      <a routerLink="/catalog">⚡ Duelist Codex</a>
+    </div>
+
+    <div class="nav-links">
+      <a routerLink="/catalog" routerLinkActive="active-nav">Catalog</a>
+      <a routerLink="/collection" routerLinkActive="active-nav">
+        My Collection
+        @if (collectionService.favoritesCount() > 0) {
+          <span class="badge">{{ collectionService.favoritesCount() }}</span>
+        }
+      </a>
+    </div>
+  </nav>
+
+  <main class="content">
+    <router-outlet />
+  </main>
+</div>

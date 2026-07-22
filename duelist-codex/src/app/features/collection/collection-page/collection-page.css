@@ -1,0 +1,40 @@
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.page-header {
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  margin: 0 0 8px;
+  color: #e5b842;
+}
+
+.result-count {
+  margin: 16px 0;
+  color: #aaa;
+  font-size: 0.95rem;
+}
+
+.empty-collection {
+  background: #1e1e1e;
+  padding: 40px;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 24px;
+  border: 1px dashed #444;
+}
+
+.btn-catalog {
+  display: inline-block;
+  margin-top: 16px;
+  background: #e5b842;
+  color: #121212;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+}

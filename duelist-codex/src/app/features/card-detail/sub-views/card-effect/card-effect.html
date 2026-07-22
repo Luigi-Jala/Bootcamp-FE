@@ -1,0 +1,21 @@
+<div class="sub-view-content">
+  <h3>Card Description & Effect</h3>
+  @if (card; as c) {
+    <div class="info-group">
+      <span class="label">Type:</span> {{ c.humanReadableCardType ?? c.type }}
+    </div>
+    @if (c.race) {
+      <div class="info-group">
+        <span class="label">Race:</span> {{ c.race }}
+      </div>
+    }
+    @if (c.attribute) {
+      <div class="info-group">
+        <span class="label">Attribute:</span> {{ c.attribute }}
+      </div>
+    }
+    <div class="effect-box">
+      <p>{{ c.desc }}</p>
+    </div>
+  }
+</div>

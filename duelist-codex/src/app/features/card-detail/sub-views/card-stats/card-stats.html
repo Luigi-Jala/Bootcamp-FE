@@ -1,0 +1,31 @@
+<div class="sub-view-content">
+  <h3>Card Statistics</h3>
+  @if (card; as c) {
+    <div class="stats-grid">
+      @if (c.atk !== undefined) {
+        <div class="stat-card">
+          <span class="stat-name">ATK</span>
+          <span class="stat-value atk">{{ c.atk }}</span>
+        </div>
+      }
+      @if (c.def !== undefined) {
+        <div class="stat-card">
+          <span class="stat-name">DEF</span>
+          <span class="stat-value def">{{ c.def }}</span>
+        </div>
+      }
+      @if (c.level !== undefined) {
+        <div class="stat-card">
+          <span class="stat-name">Level / Rank</span>
+          <span class="stat-value">★ {{ c.level }}</span>
+        </div>
+      }
+      @if (c.archetype) {
+        <div class="stat-card">
+          <span class="stat-name">Archetype</span>
+          <span class="stat-value">{{ c.archetype }}</span>
+        </div>
+      }
+    </div>
+  }
+</div>
