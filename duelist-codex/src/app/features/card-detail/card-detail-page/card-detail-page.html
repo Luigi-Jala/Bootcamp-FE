@@ -1,9 +1,9 @@
-<main class="detail-container" [appHighlightCard]="card">
+<main class="detail-container" [appHighlightCard]="card()">
   <div class="top-nav">
     <a class="back-link" routerLink="/catalog">← Back to Catalog</a>
   </div>
 
-  @if (card) {
+  @if (card(); as card) {
     <header class="detail-header">
       <div class="image-wrapper">
         <img [src]="imageUrl()" [alt]="card.name" class="card-detail-image" />

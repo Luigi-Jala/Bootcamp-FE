@@ -29,7 +29,6 @@ export class CardItemComponent {
   );
 
   toggleFavorite(event: Event): void {
-    event.stopPropagation();
     this.collectionService.toggleFavorite(this.card().id);
   }
 }
