@@ -1,132 +1,84 @@
-# Duelist Codex
+# Duelist Codex — Challenge 2: Navegación y Datos Resilientes
 
-Primera version de **Duelist Codex**, una aplicacion Angular para explorar cartas de Yu-Gi-Oh!, buscar por nombre, navegar resultados por paginas y ver el detalle de una carta seleccionada.
+Evolución de **Duelist Codex**, una aplicación Angular (versión 21) para explorar cartas de Yu-Gi-Oh!, guardar tu colección de cartas favoritas y navegar el detalle con rutas avanzadas, directivas, pipes e interceptores HTTP.
 
-## Como ejecutar
+---
+
+## 🚀 Cómo ejecutar el proyecto
 
 ```bash
 npm install
 npm start
 ```
 
-La aplicacion queda disponible en:
+La aplicación estará disponible en:
 
 ```text
 http://localhost:4200/
 ```
 
-## API usada
+---
 
-Se usa un solo endpoint de YGOPRODeck:
+## 🌐 API y Endpoints Utilizados
+
+Se consume la API pública de **YGOPRODeck**:
+
+* **Endpoint Principal:**
+  ```text
+  GET https://db.ygoprodeck.com/api/v7/cardinfo.php
+  ```
+* **Estrategia de uso de parámetros/API:**
+  Se fetchean todas las cartas en una única llamada asíncrona mediante `rxResource()` en `CardStoreService`. Las búsquedas, filtros y paginación se procesan localmente en el frontend para asegurar una respuesta instantánea y resiliente.
+
+---
+
+## 🗺️ Mapa de Rutas de la Aplicación
+
+La aplicación utiliza el módulo de enrutamiento de Angular con soporte para **Child Routing**, **Guards** y **Resolvers**:
 
 ```text
-https://db.ygoprodeck.com/api/v7/cardinfo.php
+/catalog                       ➜ Vista principal del catálogo (búsqueda y paginación)
+/card/:id                      ➜ Vista detallada de una carta (Pre-cargada con Resolver)
+  ├── /card/:id/effect         ➜ Sub-vista: Efecto y descripción completa
+  ├── /card/:id/stats          ➜ Sub-vista: Estadísticas de combate (ATK, DEF, Nivel)
+  └── /card/:id/prices         ➜ Sub-vista: Precios de mercado TCG (Formateados con Pipe)
+/collection                    ➜ Ruta protegida (Guard): Muestra la colección de favoritos
+/                              ➜ Redirección por defecto a /catalog
+**                             ➜ Redirección comodín (404) a /catalog
 ```
 
-La aplicacion carga el catalogo una vez y luego filtra por nombre en el frontend. Se eligio esto porque el challenge indica que los filtros o modificaciones de datos deben hacerse del lado del frontend.
+---
 
-## Historias de usuario
+## 📋 Historias de Usuario (Challenge 2)
 
-### HU-01 - Ver catalogo de cartas
+### HU-01 — Navegar la app por URL
+* **Descripción:** El catálogo y el detalle de cada carta tienen URLs propias navegables y compartibles. Al refrescar la página o navegar hacia atrás/adelante en el navegador, no se pierde el estado ni los filtros ingresados.
+* **Componentes / Elementos:** `app.routes.ts`, `RouterOutlet`, `RouterLink`, `CardStoreService`.
 
-Componentes:
+### HU-02 — Explorar secciones del detalle como sub-vistas (Child Routing)
+* **Descripción:** El detalle de una carta incluye sub-secciones navegables mediante rutas hijas (`effect`, `stats`, `prices`) usando `routerLink` y `<router-outlet>` sin recargar la página.
+* **Componentes / Elementos:** `CardDetailPageComponent`, `CardEffectComponent`, `CardStatsComponent`, `CardPricesComponent`.
 
-- `CatalogPageComponent`
-- `CardGridComponent`
-- Controles simples de paginacion en `CatalogPageComponent`
-- `CardItemComponent`
-- `CardApiService`
-- `CardStoreService`
+### HU-03 — Acceder a mi colección personal (Guard)
+* **Descripción:** Sección exclusiva "Mi Colección" protegida por una condición del estado (requiere tener al menos 1 carta en favoritos).
+* **Componentes / Elementos:** `CollectionService`, `favoritesGuard` (`CanActivateFn`), `CollectionPageComponent`.
 
-Expectativas tecnicas usadas:
+### HU-04 — Abrir el detalle de una carta (Resolver)
+* **Descripción:** Asegura que los datos de la carta estén listos antes de activar la ruta del detalle. Si la carta no existe o la petición falla, redirige limpiamente al catálogo.
+* **Componentes / Elementos:** `cardDetailResolver` (`ResolveFn<Card | null>`), `provideRouter(routes, withComponentInputBinding())`.
 
-- Componentes standalone.
-- Servicio dedicado para acceso a datos.
-- `ngOnInit` para cargar el catalogo al entrar.
-- `@if`, `@for` y `@empty` para estados de carga, error, vacio y listado.
-- Interpolacion y property binding para mostrar nombre, tipo e imagen.
+### HU-05 — Identificar cartas destacadas de un vistazo (Directiva Personalizada)
+* **Descripción:** Directiva de atributo reutilizable (`[appHighlightCard]`) que resalta visualmente con un resplandor y borde dorado las cartas con `ATK >= 2500`, `DEF >= 2500` o marcadas como favoritas.
+* **Componentes / Elementos:** `HighlightCardDirective`, `CardItemComponent`.
 
-Justificacion: la pagina coordina el flujo, el servicio llama la API, el store guarda el estado y los componentes visuales solo muestran datos.
+---
 
-### HU-02 - Buscar cartas por nombre
+## 🛠️ Expectativas Técnicas Implementadas
 
-Componentes:
-
-- `SearchBarComponent`
-- `CatalogPageComponent`
-- `CardStoreService`
-- `CardGridComponent`
-
-Expectativas tecnicas usadas:
-
-- Two-way binding con `[(ngModel)]`.
-- Event binding con `(ngModelChange)`.
-- Output para comunicar el termino de busqueda.
-- `ngAfterViewInit` para enfocar el input al cargar.
-- Signals y `computed` para filtrar resultados.
-- Signals para pagina actual, total de paginas y cartas visibles.
-
-Justificacion: el input necesita estado editable local, pero el termino real de busqueda vive en el store para mantener consistencia. Al cambiar la busqueda, la pagina vuelve a 1 para evitar resultados vacios por estar en una pagina alta.
-
-### HU-03 - Ver detalle de una carta
-
-Componentes:
-
-- `CardItemComponent`
-- `CardGridComponent`
-- `CatalogPageComponent`
-- `CardDetailComponent`
-- `CardStoreService`
-
-Expectativas tecnicas usadas:
-
-- Inputs y outputs para comunicar seleccion de carta.
-- Event binding para click en carta y boton de volver.
-- Signals para guardar la carta seleccionada.
-- `@if` para mostrar detalle o catalogo.
-
-Justificacion: se mantiene el detalle en la misma pantalla para conservar el contexto de busqueda sin agregar routing innecesario.
-
-### HU-04 - Organizar detalle en secciones
-
-Componentes:
-
-- `CardDetailComponent`
-- `InfoTabsComponent`
-
-Expectativas tecnicas usadas:
-
-- Componente reutilizable.
-- Inputs para recibir secciones.
-- Event binding para cambiar de pestana.
-- Signal interno para la pestana activa.
-- `@for` y `@if` para renderizar secciones.
-
-Justificacion: `InfoTabsComponent` esta en `shared` porque no depende de cartas; solo recibe titulos y lineas de informacion. Por eso podria reutilizarse en otras pantallas.
-
-### HU-05 - Mantener estado consistente
-
-Componentes/servicios:
-
-- `CardStoreService`
-- `CatalogPageComponent`
-- `SearchBarComponent`
-- `CardGridComponent`
-- `CardDetailComponent`
-
-Expectativas tecnicas usadas:
-
-- Manejo de estado centralizado con Signals.
-- `computed` para resultados filtrados, total de paginas y cartas visibles.
-- Servicio injectable con `providedIn: 'root'`.
-
-Justificacion: se eligieron Signals porque el estado principal es de UI: cartas, busqueda, carga, error y carta seleccionada. Para este caso son mas simples de explicar que `BehaviorSubject`.
-
-## Decisiones tecnicas
-
-- **Signals en vez de BehaviorSubject:** se pudo usar RxJS, pero Signals simplifica el estado para una app pequena y evita suscripciones manuales en componentes.
-- **Un solo endpoint:** se pudo llamar `?fname=` en cada busqueda, pero se eligio cargar una vez y filtrar en frontend por la indicacion del challenge.
-- **Detalle sin ruta propia:** se pudo usar Angular Router, pero para esta primera version era mas simple mantener el detalle en la misma pantalla y no perder la busqueda.
-- **Inputs/outputs entre componentes:** se pudo inyectar el store en componentes hijos, pero usar outputs demuestra comunicacion entre componentes y mantiene `CardItemComponent` mas reutilizable.
-- **Paginacion simple:** se pudo usar una libreria o paginacion desde API, pero se eligio una paginacion frontend con botones anterior/siguiente para mantener el codigo claro.
-- **CSS simple:** se uso CSS basico con grid, flex y clases directas para que el codigo sea facil de leer y explicar.
+* **Angular Router & Child Routing:** Rutas padre e hijas con `RouterOutlet` y `RouterLinkActive`.
+* **Guard Funcional:** `favoritesGuard` para proteger `/collection`.
+* **Resolver Funcional:** `cardDetailResolver` para precargar datos de la carta.
+* **Directiva Personalizada:** `HighlightCardDirective` aplicable sobre elementos de carta.
+* **Pipe Personalizado:** `YgoPriceFormatterPipe` (`ygoprice`) para dar formato a los precios de mercado.
+* **HttpClient Interceptor:** `httpErrorInterceptor` para manejo centralizado de errores de red en `app.config.ts`.
+* **Manejo Reactivo (`rxResource`):** Integración de peticiones asíncronas con Signals de Angular 21.
