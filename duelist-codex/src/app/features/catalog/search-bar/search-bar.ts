@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, model, viewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, input, output, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -8,11 +8,16 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './search-bar.css'
 })
 export class SearchBarComponent implements AfterViewInit {
-  readonly searchTerm = model('');
+  readonly searchTerm = input('');
+  readonly searchChange = output<string>();
   readonly searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
 
   ngAfterViewInit(): void {
     this.searchInput()?.nativeElement.focus();
+  }
+
+  onSearch(term: string): void {
+    this.searchChange.emit(term);
   }
 }
 

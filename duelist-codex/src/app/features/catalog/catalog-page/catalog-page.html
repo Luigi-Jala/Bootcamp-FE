@@ -5,7 +5,8 @@
   </header>
 
   <app-search-bar
-    [(searchTerm)]="store.searchTerm"
+    [searchTerm]="store.searchTerm()"
+    (searchChange)="store.updateSearchTerm($event)"
   />
 
   @if (store.loading()) {

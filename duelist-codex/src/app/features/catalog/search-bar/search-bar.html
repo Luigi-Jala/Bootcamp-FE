@@ -5,6 +5,7 @@
   class="search-input"
   type="search"
   placeholder="Try Dragon, Magician, Blue-Eyes..."
-  [(ngModel)]="searchTerm"
+  [ngModel]="searchTerm()"
+  (ngModelChange)="onSearch($event)"  
 />
 
