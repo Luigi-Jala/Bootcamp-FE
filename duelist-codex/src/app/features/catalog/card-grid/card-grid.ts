@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 import { Card } from '../../../core/models/card.model';
 import { CardItemComponent } from '../card-item/card-item';
@@ -11,10 +11,4 @@ import { CardItemComponent } from '../card-item/card-item';
 })
 export class CardGridComponent {
   readonly cards = input.required<Card[]>();
-  readonly cardSelected = output<Card>();
-
-  selectCard(card: Card): void {
-    this.cardSelected.emit(card);
-  }
 }
-

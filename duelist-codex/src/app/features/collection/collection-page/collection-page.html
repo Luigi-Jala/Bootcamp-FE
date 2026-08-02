@@ -1,0 +1,21 @@
+<main class="page">
+  <header class="page-header">
+    <h1>My Personal Collection</h1>
+    <p>View and manage all cards marked as favorites.</p>
+  </header>
+
+  <app-search-bar
+    [searchTerm]="searchTerm()"
+    (searchChange)="updateSearch($event)"
+  />
+
+  @if (favoriteCards().length > 0) {
+    <p class="result-count">Showing {{ count() }} favorite cards.</p>
+    <app-card-grid [cards]="favoriteCards()" />
+  } @else {
+    <div class="empty-collection">
+      <p>No cards in your collection match the current criteria.</p>
+      <a routerLink="/catalog" class="btn-catalog">Explore Catalog</a>
+    </div>
+  }
+</main>

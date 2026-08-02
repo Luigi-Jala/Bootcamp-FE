@@ -12,14 +12,11 @@ export class SearchBarComponent implements AfterViewInit {
   readonly searchChange = output<string>();
   readonly searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
 
-  term = '';
-
   ngAfterViewInit(): void {
-    this.term = this.searchTerm();
     this.searchInput()?.nativeElement.focus();
   }
 
-  onSearchChange(term: string): void {
+  onSearch(term: string): void {
     this.searchChange.emit(term);
   }
 }

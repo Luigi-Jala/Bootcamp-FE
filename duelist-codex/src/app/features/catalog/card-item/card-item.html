@@ -1,4 +1,14 @@
-<article class="card-item">
+<article class="card-item" [appHighlightCard]="card()">
+  <button
+    type="button"
+    class="favorite-btn"
+    [class.is-favorite]="isFavorite()"
+    (click)="toggleFavorite($event)"
+    [title]="isFavorite() ? 'Remove from collection' : 'Add to collection'"
+  >
+    {{ isFavorite() ? '★' : '☆' }}
+  </button>
+
   @if (imageUrl()) {
     <img class="card-image" [src]="imageUrl()" [alt]="card().name" />
   } @else {
@@ -8,6 +18,5 @@
   <h3>{{ card().name }}</h3>
   <p>{{ readableType() }}</p>
 
-  <button type="button" (click)="selectCard()">View detail</button>
+  <a class="view-detail-btn" [routerLink]="['/card', card().id]">View detail</a>
 </article>
-

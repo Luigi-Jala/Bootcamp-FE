@@ -1,0 +1,29 @@
+<div class="sub-view-content">
+  <h3>Market Reference Prices</h3>
+  @if (priceData; as p) {
+    <ul class="prices-list">
+      <li>
+        <span class="vendor">TCGPlayer:</span>
+        <span class="price-tag">{{ p.tcgplayer_price | ygoprice }}</span>
+      </li>
+      <li>
+        <span class="vendor">Cardmarket:</span>
+        <span class="price-tag">{{ p.cardmarket_price | ygoprice }}</span>
+      </li>
+      <li>
+        <span class="vendor">eBay:</span>
+        <span class="price-tag">{{ p.ebay_price | ygoprice }}</span>
+      </li>
+      <li>
+        <span class="vendor">Amazon:</span>
+        <span class="price-tag">{{ p.amazon_price | ygoprice }}</span>
+      </li>
+      <li>
+        <span class="vendor">CoolStuffInc:</span>
+        <span class="price-tag">{{ p.coolstuffinc_price | ygoprice }}</span>
+      </li>
+    </ul>
+  } @else {
+    <p>No price data available for this card.</p>
+  }
+</div>

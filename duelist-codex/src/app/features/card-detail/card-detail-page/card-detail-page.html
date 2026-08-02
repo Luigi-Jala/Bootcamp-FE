@@ -1,0 +1,36 @@
+<main class="detail-container" [appHighlightCard]="card()">
+  <div class="top-nav">
+    <a class="back-link" routerLink="/catalog">← Back to Catalog</a>
+  </div>
+
+  @if (card(); as card) {
+    <header class="detail-header">
+      <div class="image-wrapper">
+        <img [src]="imageUrl()" [alt]="card.name" class="card-detail-image" />
+        <button
+          type="button"
+          class="favorite-toggle-btn"
+          [class.active]="isFavorite()"
+          (click)="toggleFavorite()"
+        >
+          {{ isFavorite() ? '★ In Collection' : '☆ Add to Collection' }}
+        </button>
+      </div>
+
+      <div class="header-info">
+        <h2>{{ card.name }}</h2>
+        <p class="card-subtitle">{{ card.humanReadableCardType ?? card.type }}</p>
+      </div>
+    </header>
+
+    <nav class="sub-nav-tabs">
+      <a routerLink="effect" routerLinkActive="active-tab">Effect & Overview</a>
+      <a routerLink="stats" routerLinkActive="active-tab">Statistics</a>
+      <a routerLink="prices" routerLinkActive="active-tab">Prices</a>
+    </nav>
+
+    <section class="sub-view-outlet">
+      <router-outlet />
+    </section>
+  }
+</main>

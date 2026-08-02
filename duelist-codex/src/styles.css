@@ -1,7 +1,41 @@
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  color: #e0e0e0;
 }
 
 button, input {
   font: inherit;
+}
+
+a {
+  color: #e5b842;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Estilo para la directiva de cartas destacadas (HU-05) */
+.highlighted-card {
+  border: 2px solid #ffd700 !important;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.6) !important;
+  position: relative;
+}
+
+.highlighted-card::after {
+  content: '★ Featured';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255, 215, 0, 0.9);
+  color: #121212;
+  font-weight: bold;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  pointer-events: none;
 }

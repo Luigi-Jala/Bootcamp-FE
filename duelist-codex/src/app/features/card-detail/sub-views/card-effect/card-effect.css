@@ -1,0 +1,29 @@
+.sub-view-content {
+  background: #1e1e1e;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #333;
+}
+
+h3 {
+  margin-top: 0;
+  color: #e5b842;
+}
+
+.info-group {
+  margin-bottom: 8px;
+}
+
+.label {
+  font-weight: bold;
+  color: #aaa;
+}
+
+.effect-box {
+  background: #141414;
+  border-left: 4px solid #e5b842;
+  padding: 12px 16px;
+  margin-top: 16px;
+  border-radius: 4px;
+  line-height: 1.6;
+}

@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
-import { CatalogPageComponent } from './features/catalog/catalog-page/catalog-page';
+import { CollectionService } from './core/services/collection.service';
 
 @Component({
   selector: 'app-root',
-  imports: [CatalogPageComponent],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App { }
+export class App {
+  protected readonly collectionService = inject(CollectionService);
+}

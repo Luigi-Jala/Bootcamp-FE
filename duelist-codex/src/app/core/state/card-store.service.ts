@@ -1,4 +1,5 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 import { Card } from '../models/card.model';
 import { CardApiService } from '../services/card-api.service';
@@ -8,15 +9,21 @@ import { CardApiService } from '../services/card-api.service';
 })
 export class CardStoreService {
   private readonly cardApi = inject(CardApiService);
-  private readonly hasLoaded = signal(false);
 
-  readonly cards = signal<Card[]>([]);
   readonly searchTerm = signal('');
-  readonly loading = signal(false);
-  readonly error = signal<string | null>(null);
-  readonly selectedCard = signal<Card | null>(null);
   readonly pageSize = signal(60);
   readonly currentPage = signal(1);
+
+  // Uso de rxResource() para manejo reactivo de peticiones asíncronas
+  readonly cardsResource = rxResource({
+    stream: () => this.cardApi.getCards()
+  });
+
+  readonly cards = computed(() => this.cardsResource.value() ?? []);
+  readonly loading = computed(() => this.cardsResource.isLoading());
+  readonly error = computed(() =>
+    this.cardsResource.error() ? 'No pudimos cargar las cartas. Inténtalo más tarde.' : null
+  );
 
   readonly filteredCards = computed(() => {
     const term = this.searchTerm().trim().toLowerCase();
@@ -62,39 +69,13 @@ export class CardStoreService {
   readonly canGoPrevious = computed(() => this.currentPage() > 1);
   readonly canGoNext = computed(() => this.currentPage() < this.totalPages());
 
-  loadCards(): void {
-    if (this.hasLoaded() || this.loading()) {
-      return;
-    }
-
-    this.loading.set(true);
-    this.error.set(null);
-
-    this.cardApi.getCards().subscribe({
-      next: (cards) => {
-        this.cards.set(cards);
-        this.hasLoaded.set(true);
-        this.loading.set(false);
-      },
-      error: () => {
-        this.error.set('We could not load the cards. Please try again later.');
-        this.loading.set(false);
-      }
-    });
+  getCardById(id: number): Card | undefined {
+    return this.cards().find((card) => card.id === id);
   }
 
   updateSearchTerm(term: string): void {
     this.searchTerm.set(term);
-    this.selectedCard.set(null);
     this.currentPage.set(1);
-  }
-
-  selectCard(card: Card): void {
-    this.selectedCard.set(card);
-  }
-
-  clearSelectedCard(): void {
-    this.selectedCard.set(null);
   }
 
   goToPreviousPage(): void {
