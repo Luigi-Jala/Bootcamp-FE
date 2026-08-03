@@ -17,6 +17,18 @@ export class CatalogPageComponent {
     this.store.updateSearchTerm(term);
   }
 
+  onTypeFilter(type: string): void {
+    this.store.updateTypeFilter(type);
+  }
+
+  onAttributeFilter(attribute: string): void {
+    this.store.updateAttributeFilter(attribute);
+  }
+
+  onRaceFilter(race: string): void {
+    this.store.updateRaceFilter(race);
+  }
+
   previousPage(): void {
     this.store.goToPreviousPage();
   }

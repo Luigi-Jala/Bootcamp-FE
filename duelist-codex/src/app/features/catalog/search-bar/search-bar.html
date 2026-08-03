@@ -1,11 +1,58 @@
-<label class="search-label" for="card-search">Search by card name</label>
-<input
-  #searchInput
-  id="card-search"
-  class="search-input"
-  type="search"
-  placeholder="Try Dragon, Magician, Blue-Eyes..."
-  [ngModel]="searchTerm()"
-  (ngModelChange)="onSearch($event)"  
-/>
+<div class="search-container">
+  <div class="search-field">
+    <label class="search-label" for="card-search">Search by card name</label>
+    <input
+      #searchInput
+      id="card-search"
+      class="search-input"
+      type="search"
+      placeholder="Try Dragon, Magician, Blue-Eyes..."
+      [ngModel]="searchTerm()"
+      (ngModelChange)="onSearch($event)"
+    />
+  </div>
 
+  <div class="filters-grid">
+    <div class="filter-field">
+      <label class="filter-label" for="card-type-filter">Type</label>
+      <select
+        id="card-type-filter"
+        class="filter-select"
+        [ngModel]="selectedType()"
+        (ngModelChange)="onTypeChange($event)"
+      >
+        @for (typeOpt of cardTypes; track typeOpt.value) {
+          <option [value]="typeOpt.value">{{ typeOpt.label }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="filter-field">
+      <label class="filter-label" for="card-attribute-filter">Attribute</label>
+      <select
+        id="card-attribute-filter"
+        class="filter-select"
+        [ngModel]="selectedAttribute()"
+        (ngModelChange)="onAttributeChange($event)"
+      >
+        @for (attrOpt of attributes; track attrOpt.value) {
+          <option [value]="attrOpt.value">{{ attrOpt.label }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="filter-field">
+      <label class="filter-label" for="card-race-filter">Race / Subtype</label>
+      <select
+        id="card-race-filter"
+        class="filter-select"
+        [ngModel]="selectedRace()"
+        (ngModelChange)="onRaceChange($event)"
+      >
+        @for (raceOpt of races; track raceOpt.value) {
+          <option [value]="raceOpt.value">{{ raceOpt.label }}</option>
+        }
+      </select>
+    </div>
+  </div>
+</div>

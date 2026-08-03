@@ -25,15 +25,14 @@ export const cardDetailResolver: ResolveFn<Card | null> = (route) => {
     return existingCard;
   }
 
-  return cardApi.getCards().pipe(
-    map((cards) => {
-      const found = cards.find((c) => c.id === cardId);
-      if (!found) {
+  return cardApi.getCardById(cardId).pipe(
+    map((card) => {
+      if (!card) {
         alert('La carta solicitada no existe.');
         router.navigate(['/catalog']);
         return null;
       }
-      return found;
+      return card;
     }),
     catchError(() => {
       alert('Error al obtener la información de la carta.');

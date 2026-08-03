@@ -13,8 +13,56 @@ h1 {
 }
 
 .page-header p {
-  color: #555555;
+  color: #a0aec0;
   margin: 0;
+}
+
+.focused-card-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+  border: 1px solid #6366f1;
+  border-radius: 10px;
+  padding: 14px 20px;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.focused-badge {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: #4f46e5;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.focused-info h3 {
+  margin: 6px 0 2px;
+  font-size: 1.1rem;
+}
+
+.focused-info p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #c7d2fe;
+}
+
+.clear-focus-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.2s ease;
+}
+
+.clear-focus-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
 }
 
 .status, .result-count {
@@ -22,7 +70,7 @@ h1 {
 }
 
 .error {
-  color: #a40000;
+  color: #f87171;
   font-weight: 700;
 }
 

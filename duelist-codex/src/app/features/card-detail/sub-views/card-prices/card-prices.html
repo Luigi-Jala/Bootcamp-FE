@@ -1,6 +1,8 @@
 <div class="sub-view-content">
   <h3>Market Reference Prices</h3>
-  @if (priceData; as p) {
+  @if (loading()) {
+    <p class="loading-state">Loading market prices in background...</p>
+  } @else if (priceData(); as p) {
     <ul class="prices-list">
       <li>
         <span class="vendor">TCGPlayer:</span>

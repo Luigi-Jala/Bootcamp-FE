@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 
 import { Card } from '../../../core/models/card.model';
 import { CollectionService } from '../../../core/services/collection.service';
+import { CardStoreService } from '../../../core/state/card-store.service';
 import { HighlightCardDirective } from '../../../shared/directives/highlight-card.directive';
 
 @Component({
@@ -13,6 +14,7 @@ import { HighlightCardDirective } from '../../../shared/directives/highlight-car
 })
 export class CardItemComponent {
   private readonly collectionService = inject(CollectionService);
+  private readonly store = inject(CardStoreService);
 
   readonly card = input.required<Card>();
 
@@ -28,7 +30,17 @@ export class CardItemComponent {
     this.collectionService.isFavorite(this.card().id)
   );
 
+  readonly isFocused = computed(
+    () => this.store.focusedCard()?.id === this.card().id
+  );
+
   toggleFavorite(event: Event): void {
+    event.stopPropagation();
     this.collectionService.toggleFavorite(this.card().id);
+  }
+
+  toggleFocus(event: Event): void {
+    event.stopPropagation();
+    this.store.toggleFocusedCard(this.card());
   }
 }

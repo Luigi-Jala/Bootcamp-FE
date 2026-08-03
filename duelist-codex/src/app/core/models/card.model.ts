@@ -2,6 +2,13 @@ export interface CardApiResponse {
   data: Card[];
 }
 
+export interface CardSearchParams {
+  fname?: string;
+  type?: string;
+  attribute?: string;
+  race?: string;
+}
+
 export interface Card {
   id: number;
   name: string;

@@ -1,13 +1,25 @@
-<article class="card-item" [appHighlightCard]="card()">
-  <button
-    type="button"
-    class="favorite-btn"
-    [class.is-favorite]="isFavorite()"
-    (click)="toggleFavorite($event)"
-    [title]="isFavorite() ? 'Remove from collection' : 'Add to collection'"
-  >
-    {{ isFavorite() ? '★' : '☆' }}
-  </button>
+<article class="card-item" [appHighlightCard]="card()" [class.is-focused]="isFocused()">
+  <div class="card-actions">
+    <button
+      type="button"
+      class="favorite-btn"
+      [class.is-favorite]="isFavorite()"
+      (click)="toggleFavorite($event)"
+      [title]="isFavorite() ? 'Remove from collection' : 'Add to collection'"
+    >
+      {{ isFavorite() ? '★' : '☆' }}
+    </button>
+
+    <button
+      type="button"
+      class="focus-btn"
+      [class.active]="isFocused()"
+      (click)="toggleFocus($event)"
+      [title]="isFocused() ? 'Remove from focus' : 'Set as focused card'"
+    >
+      {{ isFocused() ? '🎯' : '⊙' }}
+    </button>
+  </div>
 
   @if (imageUrl()) {
     <img class="card-image" [src]="imageUrl()" [alt]="card().name" />
