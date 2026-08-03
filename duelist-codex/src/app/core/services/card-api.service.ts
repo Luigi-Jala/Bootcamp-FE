@@ -34,11 +34,6 @@ export class CardApiService {
       httpParams = httpParams.set('race', searchParams.race);
     }
 
-    // Si no hay ningún criterio de búsqueda, agregamos un límite por defecto para evitar cargar 12k+ cartas
-    if ([...httpParams.keys()].length === 0) {
-      httpParams = httpParams.set('num', '60');
-    }
-
     const cacheKey = httpParams.toString() || 'default_catalog';
     const cached = this.getFromCache<Card[]>(cacheKey);
     if (cached) {
