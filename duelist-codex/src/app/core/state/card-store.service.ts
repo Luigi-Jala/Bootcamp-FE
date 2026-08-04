@@ -57,27 +57,25 @@ export class CardStoreService {
 
   readonly focusedCard = signal<Card | null>(null);
 
-  readonly filteredCards = computed<Card[]>(() => this.cards());
-
   readonly totalPages = computed(() =>
-    Math.max(1, Math.ceil(this.filteredCards().length / this.pageSize()))
+    Math.max(1, Math.ceil(this.cards().length / this.pageSize()))
   );
 
   readonly visibleCards = computed<Card[]>(() => {
     const start = (this.currentPage() - 1) * this.pageSize();
     const end = start + this.pageSize();
 
-    return this.filteredCards().slice(start, end);
+    return this.cards().slice(start, end);
   });
 
   readonly hasNoResults = computed(
     () =>
       !this.loading() &&
       !this.error() &&
-      this.filteredCards().length === 0
+      this.cards().length === 0
   );
 
-  readonly totalCount = computed(() => this.filteredCards().length);
+  readonly totalCount = computed(() => this.cards().length);
   readonly visibleCount = computed(() => this.visibleCards().length);
   readonly canGoPrevious = computed(() => this.currentPage() > 1);
   readonly canGoNext = computed(() => this.currentPage() < this.totalPages());
