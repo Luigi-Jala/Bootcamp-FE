@@ -4,11 +4,6 @@ import { catchError, map, Observable, of } from 'rxjs';
 
 import { Card, CardApiResponse, CardSearchParams } from '../models/card.model';
 
-interface CacheEntry<T> {
-  timestamp: number;
-  data: T;
-}
-
 @Injectable({
   providedIn: 'root'
 })
