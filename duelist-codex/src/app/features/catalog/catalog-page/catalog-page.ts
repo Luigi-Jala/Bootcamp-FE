@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { CardStoreService } from '../../../core/state/card-store.service';
 import { CardGridComponent } from '../card-grid/card-grid';
@@ -6,7 +7,7 @@ import { SearchBarComponent } from '../search-bar/search-bar';
 
 @Component({
   selector: 'app-catalog-page',
-  imports: [SearchBarComponent, CardGridComponent],
+  imports: [RouterLink, SearchBarComponent, CardGridComponent],
   templateUrl: './catalog-page.html',
   styleUrl: './catalog-page.css'
 })

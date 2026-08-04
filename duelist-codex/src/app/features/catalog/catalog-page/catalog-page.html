@@ -22,9 +22,12 @@
         <h3>{{ focused.name }}</h3>
         <p>{{ focused.type }} {{ focused.attribute ? '• ' + focused.attribute : '' }}</p>
       </div>
-      <button type="button" class="clear-focus-btn" (click)="store.setFocusedCard(null)">
-        Desmarcar Foco
-      </button>
+      <div class="focused-actions">
+        <a class="view-detail-btn focus-view-btn" [routerLink]="['/card', focused.id]">View detail</a>
+        <button type="button" class="clear-focus-btn" (click)="store.setFocusedCard(null)">
+          Desmarcar Foco
+        </button>
+      </div>
     </section>
   }
 

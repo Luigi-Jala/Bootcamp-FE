@@ -27,6 +27,7 @@ h1 {
   padding: 14px 20px;
   margin-bottom: 20px;
   color: #ffffff;
+  gap: 16px;
 }
 
 .focused-badge {
@@ -48,6 +49,27 @@ h1 {
   margin: 0;
   font-size: 0.85rem;
   color: #c7d2fe;
+}
+
+.focused-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.focus-view-btn {
+  background: #e5b842;
+  color: #121212;
+  font-weight: bold;
+  border-radius: 6px;
+  padding: 6px 14px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+
+.focus-view-btn:hover {
+  background: #f5c852;
 }
 
 .clear-focus-btn {
