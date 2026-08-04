@@ -21,7 +21,6 @@ export class CardStoreService {
   private readonly cardApi = inject(CardApiService);
   private readonly storedSearchState = this.loadSearchState();
 
-  // Signals de criterios de búsqueda y filtrado
   readonly searchTerm = signal(this.storedSearchState.searchTerm ?? '');
   readonly selectedType = signal(this.storedSearchState.selectedType ?? 'any');
   readonly selectedAttribute = signal(this.storedSearchState.selectedAttribute ?? 'any');
@@ -30,7 +29,6 @@ export class CardStoreService {
   readonly pageSize = signal(60);
   readonly currentPage = signal(1);
 
-  // Objeto de parámetros de búsqueda derivado de las signals individuales
   readonly searchParams = computed<CardSearchParams>(() => ({
     fname: this.searchTerm(),
     type: this.selectedType(),
@@ -38,7 +36,6 @@ export class CardStoreService {
     race: this.selectedRace()
   }));
 
-  // Interoperabilidad Signal -> RxJS para aplicar debounceTime (evita peticiones por cada tecla)
   private readonly debouncedParamsSignal = toSignal(
     toObservable(this.searchParams).pipe(
       debounceTime(300),
@@ -47,7 +44,6 @@ export class CardStoreService {
     { initialValue: this.searchParams() }
   );
 
-  // rxResource() para realizar la petición asíncrona a la API usando `params` y `stream`
   readonly cardsResource = rxResource({
     params: () => this.debouncedParamsSignal(),
     stream: ({ params }) => this.cardApi.searchCards(params)
@@ -59,11 +55,7 @@ export class CardStoreService {
     this.cardsResource.error() ? 'No pudimos cargar las cartas. Inténtalo más tarde.' : null
   );
 
-  // HU-05: Carta "en foco" — estado independiente que NO se sobrescribe ante cambios de búsqueda.
-  // Se usa signal() en lugar de linkedSignal() porque el requisito dice:
-  // "la carta en foco no se pierde ni se sobrescribe sola de forma inesperada"
-  private readonly _focusedCard = signal<Card | null>(null);
-  readonly focusedCard = this._focusedCard.asReadonly();
+  readonly focusedCard = signal<Card | null>(null);
 
   readonly filteredCards = computed<Card[]>(() => this.cards());
 
@@ -118,18 +110,17 @@ export class CardStoreService {
     this.currentPage.set(1);
   }
 
-  // Toggle: si la carta ya es la enfocada, la desenfoca; si no, la enfoca
   toggleFocusedCard(card: Card): void {
-    const current = this._focusedCard();
+    const current = this.focusedCard();
     if (current?.id === card.id) {
-      this._focusedCard.set(null);
+      this.focusedCard.set(null);
     } else {
-      this._focusedCard.set(card);
+      this.focusedCard.set(card);
     }
   }
 
   setFocusedCard(card: Card | null): void {
-    this._focusedCard.set(card);
+    this.focusedCard.set(card);
   }
 
   goToPreviousPage(): void {

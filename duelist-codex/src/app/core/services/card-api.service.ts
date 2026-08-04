@@ -49,10 +49,6 @@ export class CardApiService {
           return cards;
         }),
         catchError((error) => {
-          // YGOPRODeck API devuelve 400 Bad Request cuando no encuentra cartas con la consulta
-          if (error?.status === 400 || error?.status === 404) {
-            return of([]);
-          }
           return of([]);
         })
       );
