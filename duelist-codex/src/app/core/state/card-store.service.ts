@@ -5,26 +5,16 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Card, CardSearchParams } from '../models/card.model';
 import { CardApiService } from '../services/card-api.service';
 
-const SEARCH_STATE_KEY = 'duelist_search_state';
-
-interface StoredSearchState {
-  searchTerm?: string;
-  selectedType?: string;
-  selectedAttribute?: string;
-  selectedRace?: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
 export class CardStoreService {
   private readonly cardApi = inject(CardApiService);
-  private readonly storedSearchState = this.loadSearchState();
 
-  readonly searchTerm = signal(this.storedSearchState.searchTerm ?? '');
-  readonly selectedType = signal(this.storedSearchState.selectedType ?? 'any');
-  readonly selectedAttribute = signal(this.storedSearchState.selectedAttribute ?? 'any');
-  readonly selectedRace = signal(this.storedSearchState.selectedRace ?? 'any');
+  readonly searchTerm = signal('');
+  readonly selectedType = signal('any');
+  readonly selectedAttribute = signal('any');
+  readonly selectedRace = signal('any');
 
   readonly pageSize = signal(60);
   readonly currentPage = signal(1);
@@ -86,25 +76,21 @@ export class CardStoreService {
 
   updateSearchTerm(term: string): void {
     this.searchTerm.set(term);
-    this.saveSearchState();
     this.currentPage.set(1);
   }
 
   updateTypeFilter(type: string): void {
     this.selectedType.set(type);
-    this.saveSearchState();
     this.currentPage.set(1);
   }
 
   updateAttributeFilter(attribute: string): void {
     this.selectedAttribute.set(attribute);
-    this.saveSearchState();
     this.currentPage.set(1);
   }
 
   updateRaceFilter(race: string): void {
     this.selectedRace.set(race);
-    this.saveSearchState();
     this.currentPage.set(1);
   }
 
@@ -130,31 +116,6 @@ export class CardStoreService {
   goToNextPage(): void {
     if (this.canGoNext()) {
       this.currentPage.update((page) => page + 1);
-    }
-  }
-
-  private loadSearchState(): StoredSearchState {
-    try {
-      const data = sessionStorage.getItem(SEARCH_STATE_KEY);
-      return data ? JSON.parse(data) : {};
-    } catch {
-      return {};
-    }
-  }
-
-  private saveSearchState(): void {
-    try {
-      sessionStorage.setItem(
-        SEARCH_STATE_KEY,
-        JSON.stringify({
-          searchTerm: this.searchTerm(),
-          selectedType: this.selectedType(),
-          selectedAttribute: this.selectedAttribute(),
-          selectedRace: this.selectedRace()
-        })
-      );
-    } catch (e) {
-      console.error('Error saving search state to sessionStorage', e);
     }
   }
 }
