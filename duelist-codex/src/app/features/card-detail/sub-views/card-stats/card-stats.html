@@ -5,13 +5,13 @@
       @if (c.atk !== undefined) {
         <div class="stat-card">
           <span class="stat-name">ATK</span>
-          <span class="stat-value atk">{{ c.atk }}</span>
+          <span class="stat-value atk">{{ c.atk | ygostat }}</span>
         </div>
       }
       @if (c.def !== undefined) {
         <div class="stat-card">
           <span class="stat-name">DEF</span>
-          <span class="stat-value def">{{ c.def }}</span>
+          <span class="stat-value def">{{ c.def | ygostat }}</span>
         </div>
       }
       @if (c.level !== undefined) {

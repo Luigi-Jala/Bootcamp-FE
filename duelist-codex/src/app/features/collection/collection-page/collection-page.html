@@ -5,11 +5,19 @@
   </header>
 
   <app-search-bar
-    [searchTerm]="searchTerm()"
+    [searchTerm]="store.searchTerm()"
+    [selectedType]="store.selectedType()"
+    [selectedAttribute]="store.selectedAttribute()"
+    [selectedRace]="store.selectedRace()"
     (searchChange)="updateSearch($event)"
+    (typeChange)="onTypeFilter($event)"
+    (attributeChange)="onAttributeFilter($event)"
+    (raceChange)="onRaceFilter($event)"
   />
 
-  @if (favoriteCards().length > 0) {
+  @if (loading()) {
+    <p class="status">Loading your collection...</p>
+  } @else if (favoriteCards().length > 0) {
     <p class="result-count">Showing {{ count() }} favorite cards.</p>
     <app-card-grid [cards]="favoriteCards()" />
   } @else {

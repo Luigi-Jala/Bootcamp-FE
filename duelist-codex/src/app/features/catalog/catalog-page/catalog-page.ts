@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { CardStoreService } from '../../../core/state/card-store.service';
 import { CardGridComponent } from '../card-grid/card-grid';
@@ -6,7 +7,7 @@ import { SearchBarComponent } from '../search-bar/search-bar';
 
 @Component({
   selector: 'app-catalog-page',
-  imports: [SearchBarComponent, CardGridComponent],
+  imports: [RouterLink, SearchBarComponent, CardGridComponent],
   templateUrl: './catalog-page.html',
   styleUrl: './catalog-page.css'
 })
@@ -15,6 +16,18 @@ export class CatalogPageComponent {
 
   searchCards(term: string): void {
     this.store.updateSearchTerm(term);
+  }
+
+  onTypeFilter(type: string): void {
+    this.store.updateTypeFilter(type);
+  }
+
+  onAttributeFilter(attribute: string): void {
+    this.store.updateAttributeFilter(attribute);
+  }
+
+  onRaceFilter(race: string): void {
+    this.store.updateRaceFilter(race);
   }
 
   previousPage(): void {

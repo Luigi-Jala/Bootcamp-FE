@@ -6,17 +6,37 @@
 
   <app-search-bar
     [searchTerm]="store.searchTerm()"
+    [selectedType]="store.selectedType()"
+    [selectedAttribute]="store.selectedAttribute()"
+    [selectedRace]="store.selectedRace()"
     (searchChange)="store.updateSearchTerm($event)"
+    (typeChange)="onTypeFilter($event)"
+    (attributeChange)="onAttributeFilter($event)"
+    (raceChange)="onRaceFilter($event)"
   />
+
+  @if (store.focusedCard(); as focused) {
+    <section class="focused-card-banner">
+      <div class="focused-info">
+        <span class="focused-badge">Carta en Foco</span>
+        <h3>{{ focused.name }}</h3>
+        <p>{{ focused.type }} {{ focused.attribute ? '• ' + focused.attribute : '' }}</p>
+      </div>
+      <div class="focused-actions">
+        <a class="view-detail-btn focus-view-btn" [routerLink]="['/card', focused.id]">View detail</a>
+        <button type="button" class="clear-focus-btn" (click)="store.setFocusedCard(null)">
+          Desmarcar Foco
+        </button>
+      </div>
+    </section>
+  }
 
   @if (store.loading()) {
     <p class="status">Loading cards...</p>
   } @else if (store.error()) {
     <p class="status error">{{ store.error() }}</p>
   } @else if (store.hasNoResults()) {
-    <p class="status">No cards match your search.</p>
-  } @else if (store.hasNoCards()) {
-    <p class="status">No cards are available right now.</p>
+    <p class="status">No cards match your search criteria.</p>
   } @else {
     <p class="result-count">
       Showing {{ store.visibleCount() }} of {{ store.totalCount() }} cards.

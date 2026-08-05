@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { Card } from '../../../core/models/card.model';
@@ -14,28 +14,32 @@ import { SearchBarComponent } from '../../catalog/search-bar/search-bar';
   styleUrl: './collection-page.css'
 })
 export class CollectionPageComponent {
-  private readonly store = inject(CardStoreService);
   private readonly collectionService = inject(CollectionService);
+  protected readonly store = inject(CardStoreService);
 
-  readonly searchTerm = signal('');
+  readonly loading = computed(() => this.store.loading());
 
   readonly favoriteCards = computed<Card[]>(() => {
-    const favoriteIds = this.collectionService.favorites();
-    const favoriteCards = this.store.cards().filter((card) => favoriteIds.includes(card.id));
-    const term = this.searchTerm().trim().toLowerCase();
+    const favoriteIds = new Set(this.collectionService.favorites());
 
-    if (!term) {
-      return favoriteCards;
-    }
-
-    return favoriteCards.filter((card) =>
-      card.name.toLowerCase().includes(term)
-    );
+    return this.store.cards().filter((card: Card) => favoriteIds.has(card.id));
   });
 
   readonly count = computed(() => this.favoriteCards().length);
 
   updateSearch(term: string): void {
-    this.searchTerm.set(term);
+    this.store.updateSearchTerm(term);
+  }
+
+  onTypeFilter(type: string): void {
+    this.store.updateTypeFilter(type);
+  }
+
+  onAttributeFilter(attribute: string): void {
+    this.store.updateAttributeFilter(attribute);
+  }
+
+  onRaceFilter(race: string): void {
+    this.store.updateRaceFilter(race);
   }
 }
