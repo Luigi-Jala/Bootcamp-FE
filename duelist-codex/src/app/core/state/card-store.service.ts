@@ -39,7 +39,9 @@ export class CardStoreService {
     stream: ({ params }) => this.cardApi.searchCards(params)
   });
 
-  readonly cards = computed<Card[]>(() => this.cardsResource.value() ?? []);
+  readonly cards = computed<Card[]>(() =>
+    this.cardsResource.hasValue() ? (this.cardsResource.value() ?? []) : []
+  );
   readonly loading = computed(() => this.cardsResource.isLoading());
   readonly error = computed(() =>
     this.cardsResource.error() ? 'No pudimos cargar las cartas. Inténtalo más tarde.' : null

@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, throwError } from 'rxjs';
 
 import { Card, CardApiResponse, CardSearchParams } from '../models/card.model';
 
@@ -32,7 +32,10 @@ export class CardApiService {
       .pipe(
         map((response) => response.data ?? []),
         catchError((error) => {
-          return of([]);
+          if (error?.status === 400) {
+            return of<Card[]>([]);
+          }
+          return throwError(() => error);
         })
       );
   }
