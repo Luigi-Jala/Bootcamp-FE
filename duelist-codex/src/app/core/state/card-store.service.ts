@@ -1,4 +1,4 @@
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, linkedSignal, signal } from '@angular/core';
 import { rxResource, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 
@@ -45,7 +45,11 @@ export class CardStoreService {
     this.cardsResource.error() ? 'No pudimos cargar las cartas. Inténtalo más tarde.' : null
   );
 
-  readonly focusedCard = signal<Card | null>(null);
+  // HU-05: linkedSignal derivado de this.cards que retiene el valor previo del usuario al cambiar los datos
+  readonly focusedCard = linkedSignal<Card[], Card | null>({
+    source: this.cards,
+    computation: (_newCards, previous) => previous?.value ?? null
+  });
 
   readonly totalPages = computed(() =>
     Math.max(1, Math.ceil(this.cards().length / this.pageSize()))
